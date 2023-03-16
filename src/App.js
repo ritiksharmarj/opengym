@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import SingleWorkoutDetail from './pages/SingleWorkoutDetail';
 
 const App = () => (
   <BrowserRouter>
@@ -11,6 +12,7 @@ const App = () => (
 
     <Routes>
       <Route path='/' element={<Home />}></Route>
+      <Route path='/workout/:id' element={<SingleWorkoutDetail />}></Route>
     </Routes>
 
     <Footer />

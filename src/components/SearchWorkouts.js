@@ -15,11 +15,18 @@ const SearchExercises = ({ setWorkouts }) => {
       );
 
       // Filter the workouts data based on the user's input
-      const searchedWorkouts = workoutsData.filter((workout) =>
-        workout.name.toLowerCase().includes(search)
+      const searchedWorkouts = workoutsData.filter(
+        (workout) =>
+          workout.name.toLowerCase().includes(search) ||
+          workout.target.toLowerCase().includes(search) ||
+          workout.equipment.toLowerCase().includes(search) ||
+          workout.bodyPart.toLowerCase().includes(search)
       );
 
-      console.log(searchedWorkouts);
+      // Empty the search field after click the search button
+      setSearch('');
+
+      setWorkouts(searchedWorkouts);
     }
   };
 
