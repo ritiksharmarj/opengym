@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import ReactPaginate from 'react-paginate';
 
 import WorkoutCard from './WorkoutCard';
 import { fetchData, workoutOptions } from '../utils/fetchData';
+// import Pagination from './Pagination';
 
 const Workouts = ({ setWorkouts, workouts }) => {
   //Pagination state
@@ -22,13 +24,18 @@ const Workouts = ({ setWorkouts, workouts }) => {
     })();
   }, [setWorkouts]);
 
-  // Pagination
+  // Pagination Calc
   const indexOfLastWorkout = currentPage * workoutsPerPage; // 1 * 6 = 6
   const indexOfFirstWorkout = indexOfLastWorkout - workoutsPerPage; // 6 - 6 = 0
   const currentWorkouts = workouts.slice(
     indexOfFirstWorkout,
     indexOfLastWorkout
   ); // So it will give us array from 0 to 5
+
+  const handlePagination = (event) => {
+    const selectedPage = (event.selected * workoutsPerPage) % workouts.length;
+    setCurrentPage(selectedPage);
+  };
 
   return (
     <section className='mx-auto max-w-7xl'>
@@ -37,29 +44,32 @@ const Workouts = ({ setWorkouts, workouts }) => {
           Perfect Workouts
         </h2>
 
+        {/* Workout Card */}
         <div className='grid gap-7 lg:gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3'>
           {currentWorkouts.map((workout) => (
             <WorkoutCard key={workout.id} workout={workout} />
           ))}
         </div>
 
-        <div className='mt-8'>
+        {/* Pagination */}
+        <div className='mt-10'>
           {workouts.length > 9 && (
-            <div className='flex items-center justify-center gap-4'>
-              <button className='flex items-center justify-center bg-brown hover:bg-brown-dark rounded-lg p-2 focus:outline-none focus:ring focus:ring-brown-light transition text-white'>
-                <ChevronLeftIcon className='h-5 w-5' />
-              </button>
-
-              {[...Array(Math.ceil(workouts.length / workoutsPerPage))].map(
-                (_, idx) => (
-                  <div key={idx}>{idx + 1}</div>
-                )
-              )}
-
-              <button className='flex items-center justify-center bg-brown hover:bg-brown-dark rounded-lg p-2 focus:outline-none focus:ring focus:ring-brown-light transition text-white'>
-                <ChevronRightIcon className='h-5 w-5' />
-              </button>
-            </div>
+            // <Pagination
+            //   currentPage={currentPage}
+            //   setCurrentPage={setCurrentPage}
+            //   workoutsPerPage={workoutsPerPage}
+            //   workouts={workouts}
+            // />
+            <ReactPaginate
+              className='flex items-center justify-center gap-4'
+              breakLabel='...'
+              previousLabel={<ChevronLeftIcon className='h-5 w-5' />}
+              nextLabel={<ChevronRightIcon className='h-5 w-5' />}
+              onPageChange={handlePagination}
+              pageRangeDisplayed={3}
+              pageCount={Math.ceil(workouts.length / workoutsPerPage)}
+              renderOnZeroPageCount={null}
+            />
           )}
         </div>
       </div>
