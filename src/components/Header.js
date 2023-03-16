@@ -5,7 +5,7 @@ import Logo from '../assets/images/opengym-logo.svg';
 import GithubIcon from '../assets/icons/github-icon.svg';
 
 const Header = () => (
-  <header className='sticky top-0 z-30 h-[72px] bg-white bg-opacity-50 backdrop-blur backdrop-filter'>
+  <header className='sticky top-0 z-30 bg-white bg-opacity-50 backdrop-blur backdrop-filter'>
     <div className='mx-auto max-w-7xl xl:px-8'>
       <div className='flex items-center justify-between border-b border-gray-200 py-5 px-4 sm:px-6 lg:px-8 xl:px-0'>
         <Link to='/'>

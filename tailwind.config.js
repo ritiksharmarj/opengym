@@ -8,6 +8,7 @@ module.exports = {
       current: 'currentColor',
       gray: {
         200: '#e5e7eb',
+        300: '#d1d5db',
       },
       slate: {
         500: '#64748b',
@@ -22,5 +23,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 };
