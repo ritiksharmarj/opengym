@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
-import ReactPaginate from 'react-paginate';
+import { MagnifyingGlass } from 'react-loader-spinner';
 
-import WorkoutCard from './WorkoutCard';
+import WorkoutCard from './cards/WorkoutCard';
 import { fetchData, workoutOptions } from '../utils/fetchData';
-// import Pagination from './Pagination';
+import Pagination from './Pagination';
 
 const Workouts = ({ setWorkouts, workouts }) => {
   //Pagination state
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const [workoutsPerPage] = useState(6);
 
   // Fetch perfect workouts as soon as the page loads
@@ -25,17 +24,21 @@ const Workouts = ({ setWorkouts, workouts }) => {
   }, [setWorkouts]);
 
   // Pagination Calc
-  const indexOfLastWorkout = currentPage * workoutsPerPage; // 1 * 6 = 6
-  const indexOfFirstWorkout = indexOfLastWorkout - workoutsPerPage; // 6 - 6 = 0
-  const currentWorkouts = workouts.slice(
-    indexOfFirstWorkout,
-    indexOfLastWorkout
-  ); // So it will give us array from 0 to 5
+  const offset = currentPage * workoutsPerPage; // 0 * 6 = 0
+  const currentWorkouts = workouts.slice(offset, offset + workoutsPerPage);
 
-  const handlePagination = (event) => {
-    const selectedPage = (event.selected * workoutsPerPage) % workouts.length;
-    setCurrentPage(selectedPage);
-  };
+  // Display Loader until current workouts fetch
+  if (!currentWorkouts.length)
+    return (
+      <div className='flex justify-center mt-28'>
+        <MagnifyingGlass
+          height={60}
+          width={60}
+          glassColor='#c0efff'
+          color='#9D4635'
+        />
+      </div>
+    );
 
   return (
     <section className='mx-auto max-w-7xl'>
@@ -54,21 +57,10 @@ const Workouts = ({ setWorkouts, workouts }) => {
         {/* Pagination */}
         <div className='mt-10'>
           {workouts.length > 9 && (
-            // <Pagination
-            //   currentPage={currentPage}
-            //   setCurrentPage={setCurrentPage}
-            //   workoutsPerPage={workoutsPerPage}
-            //   workouts={workouts}
-            // />
-            <ReactPaginate
-              className='flex items-center justify-center gap-4'
-              breakLabel='...'
-              previousLabel={<ChevronLeftIcon className='h-5 w-5' />}
-              nextLabel={<ChevronRightIcon className='h-5 w-5' />}
-              onPageChange={handlePagination}
-              pageRangeDisplayed={3}
-              pageCount={Math.ceil(workouts.length / workoutsPerPage)}
-              renderOnZeroPageCount={null}
+            <Pagination
+              setCurrentPage={setCurrentPage}
+              workoutsPerPage={workoutsPerPage}
+              workouts={workouts}
             />
           )}
         </div>

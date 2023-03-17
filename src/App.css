@@ -1,0 +1,14 @@
+.pagination__link--active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background-color: #e1998b;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  min-width: 2.5rem;
+}
+
+.pagination__link--active:hover {
+  background-color: #9d4635;
+}
