@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <>
       <main className='mx-auto max-w-7xl'>
-        <div className='flex flex-col items-center px-4 sm:px-6 lg:px-8 pt-24'>
+        <div className='flex flex-col items-center px-4 sm:px-6 lg:px-8 pt-14 sm:pt-24'>
           <p className='text-sm text-slate-500 border border-gray-200 rounded-2xl py-1 px-4 mb-5'>
             Access more than <span className='font-semibold'>1000</span>{' '}
             workouts

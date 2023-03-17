@@ -24,10 +24,6 @@ const Pagination = ({ setCurrentPage, workoutsPerPage, workouts }) => {
         marginPagesDisplayed={1}
         pageCount={pageCount}
         renderOnZeroPageCount={null}
-        containerClassName={'pagination'}
-        previousLinkClassName={'pagination__link'}
-        nextLinkClassName={'pagination__link'}
-        disabledClassName={'pagination__link--disabled'}
         activeClassName={'pagination__link--active'}
       />
     </div>

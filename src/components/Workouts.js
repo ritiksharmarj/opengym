@@ -43,7 +43,7 @@ const Workouts = ({ setWorkouts, workouts }) => {
   return (
     <section className='mx-auto max-w-7xl'>
       <div className='px-4 sm:px-6 lg:px-8 mt-28'>
-        <h2 className='font-bold text-center text-5xl mb-10'>
+        <h2 className='font-bold text-center text-3xl sm:text-5xl mb-10'>
           Perfect Workouts
         </h2>
 
