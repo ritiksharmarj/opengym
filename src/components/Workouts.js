@@ -9,18 +9,23 @@ const Workouts = ({ setWorkouts, workouts }) => {
   //Pagination state
   const [currentPage, setCurrentPage] = useState(0);
   const [workoutsPerPage] = useState(6);
+  console.log(setWorkouts);
 
   // Fetch perfect workouts as soon as the page loads
   useEffect(() => {
-    // IIFE
-    (async () => {
-      const workoutsData = await fetchData(
-        'https://exercisedb.p.rapidapi.com/exercises',
-        workoutOptions
-      );
+    try {
+      // IIFE
+      (async () => {
+        const workoutsData = await fetchData(
+          'https://exercisedb.p.rapidapi.com/exercises',
+          workoutOptions
+        );
 
-      setWorkouts(workoutsData);
-    })();
+        setWorkouts(workoutsData);
+      })();
+    } catch (error) {
+      console.log(error);
+    }
   }, [setWorkouts]);
 
   // Pagination Calc
@@ -32,11 +37,15 @@ const Workouts = ({ setWorkouts, workouts }) => {
     return (
       <div className='flex justify-center mt-28'>
         <MagnifyingGlass
+          wrapperClass='magnifying-glass'
           height={60}
           width={60}
           glassColor='#c0efff'
           color='#9D4635'
         />
+        <p className='error-workout-not-found hidden'>
+          Workout not found. Try again!
+        </p>
       </div>
     );
 

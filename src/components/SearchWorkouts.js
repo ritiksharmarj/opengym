@@ -4,29 +4,38 @@ import { fetchData, workoutOptions } from '../utils/fetchData';
 
 const SearchExercises = ({ setWorkouts }) => {
   const [search, setSearch] = useState('');
+  // let searchedWorkoutsNotFound;
 
   // Handler function for search field
   const handleSearch = async () => {
-    // If there is any input in the search field
-    if (search) {
-      const workoutsData = await fetchData(
-        'https://exercisedb.p.rapidapi.com/exercises',
-        workoutOptions
-      );
+    try {
+      // If there is any input in the search field
+      if (search) {
+        const workoutsData = await fetchData(
+          'https://exercisedb.p.rapidapi.com/exercises',
+          workoutOptions
+        );
 
-      // Filter the workouts data based on the user's input
-      const searchedWorkouts = workoutsData.filter(
-        (workout) =>
-          workout.name.toLowerCase().includes(search) ||
-          workout.target.toLowerCase().includes(search) ||
-          workout.equipment.toLowerCase().includes(search) ||
-          workout.bodyPart.toLowerCase().includes(search)
-      );
+        // Filter the workouts data based on the user's input
+        const searchedWorkouts = workoutsData.filter(
+          (workout) =>
+            workout.name.toLowerCase().includes(search) ||
+            workout.target.toLowerCase().includes(search) ||
+            workout.equipment.toLowerCase().includes(search) ||
+            workout.bodyPart.toLowerCase().includes(search)
+        );
 
-      // Empty the search field after click the search button
-      setSearch('');
+        // Empty the search field after click the search button
+        setSearch('');
 
-      setWorkouts(searchedWorkouts);
+        console.log(searchedWorkouts);
+        setWorkouts(searchedWorkouts);
+        // searchedWorkouts.length === 0
+        //   ? (searchedWorkoutsNotFound = 'Workouts Not Found. Try Again!')
+        //   : setWorkouts(searchedWorkouts);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
