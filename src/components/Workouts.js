@@ -9,7 +9,6 @@ const Workouts = ({ setWorkouts, workouts }) => {
   //Pagination state
   const [currentPage, setCurrentPage] = useState(0);
   const [workoutsPerPage] = useState(6);
-  console.log(setWorkouts);
 
   // Fetch perfect workouts as soon as the page loads
   useEffect(() => {
@@ -31,6 +30,14 @@ const Workouts = ({ setWorkouts, workouts }) => {
   // Pagination Calc
   const offset = currentPage * workoutsPerPage; // 0 * 6 = 0
   const currentWorkouts = workouts.slice(offset, offset + workoutsPerPage);
+
+  // If there is no currentworkouts based on the user's search input
+  if (currentWorkouts.length === 0)
+    return (
+      <p className='px-4 sm:px-6 lg:px-8 mt-28 mx-auto text-center text-slate-700'>
+        Workouts not found. Try again!
+      </p>
+    );
 
   // Display Loader until current workouts fetch
   if (!currentWorkouts.length)
