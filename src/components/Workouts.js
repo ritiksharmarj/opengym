@@ -4,6 +4,7 @@ import { MagnifyingGlass } from 'react-loader-spinner';
 import WorkoutCard from './cards/WorkoutCard';
 import { fetchData, workoutOptions } from '../utils/fetchData';
 import Pagination from './Pagination';
+import { WORKOUT_DATABASE_URL } from '../utils/config';
 
 const Workouts = ({ setWorkouts, workouts }) => {
   //Pagination state
@@ -16,7 +17,7 @@ const Workouts = ({ setWorkouts, workouts }) => {
       // IIFE
       (async () => {
         const workoutsData = await fetchData(
-          'https://exercisedb.p.rapidapi.com/exercises',
+          `${WORKOUT_DATABASE_URL}/exercises`,
           workoutOptions
         );
 
