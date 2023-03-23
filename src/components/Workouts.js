@@ -6,7 +6,7 @@ import { fetchData, workoutOptions } from '../utils/fetchData';
 import Pagination from './Pagination';
 import { WORKOUT_DATABASE_URL } from '../utils/config';
 
-const Workouts = ({ setWorkouts, workouts }) => {
+const Workouts = ({ setWorkouts, workouts, searchNotFound }) => {
   //Pagination state
   const [currentPage, setCurrentPage] = useState(0);
   const [workoutsPerPage] = useState(6);
@@ -32,14 +32,6 @@ const Workouts = ({ setWorkouts, workouts }) => {
   const offset = currentPage * workoutsPerPage; // 0 * 6 = 0
   const currentWorkouts = workouts.slice(offset, offset + workoutsPerPage);
 
-  // If there is no currentworkouts based on the user's search input
-  if (currentWorkouts.length === 0)
-    return (
-      <p className='px-4 sm:px-6 lg:px-8 mt-28 mx-auto text-center text-slate-700'>
-        Workouts not found. Try again!
-      </p>
-    );
-
   // Display Loader until current workouts fetch
   if (!currentWorkouts.length)
     return (
@@ -55,6 +47,14 @@ const Workouts = ({ setWorkouts, workouts }) => {
           Workout not found. Try again!
         </p>
       </div>
+    );
+
+  // If there is no workouts based on the user's search input
+  if (searchNotFound !== '')
+    return (
+      <p className='px-4 sm:px-6 lg:px-8 mt-28 mx-auto text-center text-slate-700'>
+        {searchNotFound}
+      </p>
     );
 
   return (

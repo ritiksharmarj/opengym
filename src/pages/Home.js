@@ -6,6 +6,7 @@ import Workouts from '../components/Workouts';
 
 const Home = () => {
   const [workouts, setWorkouts] = useState([]);
+  const [searchNotFound, setSearchNotFound] = useState('');
 
   return (
     <>
@@ -30,11 +31,18 @@ const Home = () => {
             correctly.
           </p>
 
-          <SearchWorkouts setWorkouts={setWorkouts} />
+          <SearchWorkouts
+            setWorkouts={setWorkouts}
+            setSearchNotFound={setSearchNotFound}
+          />
         </div>
       </main>
 
-      <Workouts setWorkouts={setWorkouts} workouts={workouts} />
+      <Workouts
+        setWorkouts={setWorkouts}
+        workouts={workouts}
+        searchNotFound={searchNotFound}
+      />
     </>
   );
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { fetchData, workoutOptions } from '../utils/fetchData';
 
-const SearchExercises = ({ setWorkouts }) => {
+const SearchExercises = ({ setWorkouts, setSearchNotFound }) => {
   const [search, setSearch] = useState('');
   // let searchedWorkoutsNotFound;
 
@@ -28,11 +28,10 @@ const SearchExercises = ({ setWorkouts }) => {
         // Empty the search field after click the search button
         setSearch('');
 
-        console.log(searchedWorkouts);
-        setWorkouts(searchedWorkouts);
-        // searchedWorkouts.length === 0
-        //   ? (searchedWorkoutsNotFound = 'Workouts Not Found. Try Again!')
-        //   : setWorkouts(searchedWorkouts);
+        // setWorkouts(searchedWorkouts);
+        searchedWorkouts.length === 0
+          ? setSearchNotFound('Workouts not found. Try again!')
+          : setWorkouts(searchedWorkouts);
       }
     } catch (error) {
       console.log(error);
