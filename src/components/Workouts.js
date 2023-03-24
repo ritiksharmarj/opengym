@@ -4,12 +4,12 @@ import { MagnifyingGlass } from 'react-loader-spinner';
 import WorkoutCard from './cards/WorkoutCard';
 import { fetchData, workoutOptions } from '../utils/fetchData';
 import Pagination from './Pagination';
-import { WORKOUT_DATABASE_URL } from '../utils/config';
+import { WORKOUT_DATABASE_URL, RES_PER_PAGE } from '../utils/config';
 
 const Workouts = ({ setWorkouts, workouts, searchNotFound }) => {
   //Pagination state
   const [currentPage, setCurrentPage] = useState(0);
-  const [workoutsPerPage] = useState(6);
+  // const [workoutsPerPage] = useState(6);
 
   // Fetch perfect workouts as soon as the page loads
   useEffect(() => {
@@ -24,13 +24,13 @@ const Workouts = ({ setWorkouts, workouts, searchNotFound }) => {
         setWorkouts(workoutsData);
       })();
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }, [setWorkouts]);
 
   // Pagination Calc
-  const offset = currentPage * workoutsPerPage; // 0 * 6 = 0
-  const currentWorkouts = workouts.slice(offset, offset + workoutsPerPage);
+  const offset = currentPage * RES_PER_PAGE; // 0 * 6 = 0
+  const currentWorkouts = workouts?.slice(offset, offset + RES_PER_PAGE);
 
   // Display Loader until current workouts fetch
   if (!currentWorkouts.length)
@@ -43,9 +43,6 @@ const Workouts = ({ setWorkouts, workouts, searchNotFound }) => {
           glassColor='#c0efff'
           color='#9D4635'
         />
-        <p className='error-workout-not-found hidden'>
-          Workout not found. Try again!
-        </p>
       </div>
     );
 
@@ -74,11 +71,7 @@ const Workouts = ({ setWorkouts, workouts, searchNotFound }) => {
         {/* Pagination */}
         <div className='mt-10'>
           {workouts.length > 9 && (
-            <Pagination
-              setCurrentPage={setCurrentPage}
-              workoutsPerPage={workoutsPerPage}
-              workouts={workouts}
-            />
+            <Pagination setCurrentPage={setCurrentPage} workouts={workouts} />
           )}
         </div>
       </div>

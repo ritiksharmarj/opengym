@@ -47,6 +47,7 @@ const SingleWorkoutDetail = () => {
     })();
   }, [id]);
 
+  // De-structure the workout detail
   const { bodyPart, gifUrl, name, target, equipment } = workoutDetail;
 
   const workoutExtraDetail = [
