@@ -1,7 +1,12 @@
 import React from 'react';
+import { MagnifyingGlass } from 'react-loader-spinner';
 
-const SimilarWorkouts = ({ targetMuscleWorkouts, equipmentWorkouts }) => {
-  return <div>SimilarWorkouts</div>;
-};
+import HorizontalScrollbar from './HorizontalScrollbar';
+
+const SimilarWorkouts = ({ targetMuscleWorkouts, equipmentWorkouts }) => (
+  <section>
+    <div></div>
+  </section>
+);
 
 export default SimilarWorkouts;

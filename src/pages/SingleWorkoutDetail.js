@@ -91,7 +91,10 @@ const SingleWorkoutDetail = () => {
             </p>
 
             {workoutExtraDetail.map((item) => (
-              <div className='flex items-center gap-2 mb-4 text-slate-700 fill-slate-700 border-b-2 border-gray-300 pb-4'>
+              <div
+                key={item.name}
+                className='flex items-center gap-2 mb-4 text-slate-700 fill-slate-700 border-b-2 border-gray-300 pb-4'
+              >
                 <div className='w-6'>{item.icon}</div>
                 <div className='capitalize'>
                   {item.tag} - {item.name}

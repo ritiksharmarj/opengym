@@ -23,7 +23,31 @@ const WorkoutVideos = ({ workoutVideos, name }) => {
           <span className='text-brown'>{name}</span> Workout Videos
         </h2>
 
-        <div></div>
+        <div className='grid gap-7 lg:gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3'>
+          {workoutVideos?.slice(0, 3)?.map((item) => (
+            <a
+              key={item.video.videoId}
+              href={`https://www.youtube.com/watch?v=${item.video.videoId}`}
+              target='_blank'
+              rel='noreferrer'
+            >
+              <div className='hover:text-brown'>
+                <img
+                  className='w-full h-52 object-cover rounded-xl'
+                  src={item.video.thumbnails[0].url}
+                  alt={item.video.title}
+                  loading='lazy'
+                />
+                <h3 className='sm:text-xl text-lg font-semibold sm:mt-4 mt-3'>
+                  {item.video.title}
+                </h3>
+                <p className='text-slate-500 text-sm mt-2'>
+                  {item.video.channelName}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );
