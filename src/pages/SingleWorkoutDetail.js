@@ -5,16 +5,18 @@ import { CheckCircleIcon } from '@heroicons/react/24/outline';
 import { fetchData, workoutOptions, youtubeOptions } from '../utils/fetchData';
 import { WORKOUT_DATABASE_URL, YT_SEARCH_URL } from '../utils/config';
 import WorkoutVideos from '../components/WorkoutVideos';
-import SimilarWorkouts from '../components/SimilarWorkouts';
+// import SimilarWorkouts from '../components/SimilarWorkouts';
 
 const SingleWorkoutDetail = () => {
   const { id } = useParams();
   const [workoutDetail, setWorkoutDetail] = useState({});
   const [workoutVideos, setWorkoutVideos] = useState([]);
-  const [targetMuscleWorkouts, setTargetMuscleWorkouts] = useState([]);
-  const [equipmentWorkouts, setEquipmentWorkouts] = useState([]);
+  // const [targetMuscleWorkouts, setTargetMuscleWorkouts] = useState([]);
+  // const [equipmentWorkouts, setEquipmentWorkouts] = useState([]);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     // IIFE
     (async () => {
       // Fetch single workout data using ID
@@ -31,6 +33,8 @@ const SingleWorkoutDetail = () => {
       );
       setWorkoutVideos(workoutVideosData.contents);
 
+      // TODO - similar workouts
+      /*
       // Fetch target muscle workouts list
       const targetMuscleWorkoutsData = await fetchData(
         `${WORKOUT_DATABASE_URL}/exercises/target/${singleWorkoutDetailData.target}`,
@@ -44,6 +48,7 @@ const SingleWorkoutDetail = () => {
         workoutOptions
       );
       setEquipmentWorkouts(equipmentWorkoutsData);
+      */
     })();
   }, [id]);
 
@@ -106,10 +111,6 @@ const SingleWorkoutDetail = () => {
       </main>
 
       <WorkoutVideos workoutVideos={workoutVideos} name={workoutDetail.name} />
-      <SimilarWorkouts
-        targetMuscleWorkouts={targetMuscleWorkouts}
-        equipmentWorkouts={equipmentWorkouts}
-      />
     </>
   );
 };
