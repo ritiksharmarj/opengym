@@ -3,8 +3,8 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import ReactPaginate from 'react-paginate';
 import { RES_PER_PAGE } from '../utils/config';
 
-const Pagination = ({ setCurrentPage, workouts }) => {
-  const pageCount = Math.ceil(workouts.length / RES_PER_PAGE);
+const Pagination = ({ setCurrentPage, items }) => {
+  const pageCount = Math.ceil(items.length / RES_PER_PAGE);
 
   const handlePagination = ({ selected: selectedPage }) => {
     setCurrentPage(selectedPage);

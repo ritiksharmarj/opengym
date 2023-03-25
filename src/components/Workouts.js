@@ -56,7 +56,7 @@ const Workouts = ({ setWorkouts, workouts, searchNotFound }) => {
 
   return (
     <section className='mx-auto max-w-7xl'>
-      <div className='px-4 sm:px-6 lg:px-8 mt-28'>
+      <div className='px-4 sm:px-6 lg:px-8 mt-28 mb-16'>
         <h2 className='font-bold text-center text-3xl sm:text-5xl mb-10'>
           Perfect Workouts
         </h2>
@@ -71,7 +71,7 @@ const Workouts = ({ setWorkouts, workouts, searchNotFound }) => {
         {/* Pagination */}
         <div className='mt-10'>
           {workouts.length > 9 && (
-            <Pagination setCurrentPage={setCurrentPage} workouts={workouts} />
+            <Pagination setCurrentPage={setCurrentPage} items={workouts} />
           )}
         </div>
       </div>
