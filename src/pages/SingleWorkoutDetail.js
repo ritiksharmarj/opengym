@@ -5,14 +5,11 @@ import { CheckCircleIcon } from '@heroicons/react/24/outline';
 import { fetchData, workoutOptions, youtubeOptions } from '../utils/fetchData';
 import { WORKOUT_DATABASE_URL, YT_SEARCH_URL } from '../utils/config';
 import WorkoutVideos from '../components/WorkoutVideos';
-// import SimilarWorkouts from '../components/SimilarWorkouts';
 
 const SingleWorkoutDetail = () => {
   const { id } = useParams();
   const [workoutDetail, setWorkoutDetail] = useState({});
   const [workoutVideos, setWorkoutVideos] = useState([]);
-  // const [targetMuscleWorkouts, setTargetMuscleWorkouts] = useState([]);
-  // const [equipmentWorkouts, setEquipmentWorkouts] = useState([]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -32,23 +29,6 @@ const SingleWorkoutDetail = () => {
         youtubeOptions
       );
       setWorkoutVideos(workoutVideosData.contents);
-
-      // TODO - similar workouts
-      /*
-      // Fetch target muscle workouts list
-      const targetMuscleWorkoutsData = await fetchData(
-        `${WORKOUT_DATABASE_URL}/exercises/target/${singleWorkoutDetailData.target}`,
-        workoutOptions
-      );
-      setTargetMuscleWorkouts(targetMuscleWorkoutsData);
-
-      // Fetch equipment workouts list
-      const equipmentWorkoutsData = await fetchData(
-        `${WORKOUT_DATABASE_URL}/exercises/equipment/${singleWorkoutDetailData.equipment}`,
-        workoutOptions
-      );
-      setEquipmentWorkouts(equipmentWorkoutsData);
-      */
     })();
   }, [id]);
 
