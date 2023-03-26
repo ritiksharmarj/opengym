@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CheckCircleIcon } from '@heroicons/react/24/outline';
+// import slugify from 'slugify';
 
 import { fetchData, workoutOptions, youtubeOptions } from '../utils/fetchData';
 import { WORKOUT_DATABASE_URL, YT_SEARCH_URL } from '../utils/config';
@@ -22,6 +23,12 @@ const SingleWorkoutDetail = () => {
         workoutOptions
       );
       setWorkoutDetail(singleWorkoutDetailData);
+
+      // const postSlug = slugify(singleWorkoutDetailData.name, {
+      //   lower: true,
+      //   replacement: '-',
+      // });
+      // history.replace(`/workout/${postSlug}`);
 
       // Fetch workout videos using workout name
       const workoutVideosData = await fetchData(
