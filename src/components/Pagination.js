@@ -3,11 +3,14 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import ReactPaginate from 'react-paginate';
 import { RES_PER_PAGE } from '../utils/config';
 
-const Pagination = ({ setCurrentPage, items }) => {
+const Pagination = ({ setCurrentPage, items, elementById }) => {
   const pageCount = Math.ceil(items.length / RES_PER_PAGE);
 
   const handlePagination = ({ selected: selectedPage }) => {
     setCurrentPage(selectedPage);
+
+    // Scroll to the workouts section right after user clicks on pagination
+    elementById.scrollIntoView({ behavior: 'smooth' });
   };
 
   // https://www.npmjs.com/package/react-paginate?activeTab=readme

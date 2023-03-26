@@ -16,7 +16,7 @@ const WorkoutCard = ({ workout }) => (
             {workout.name}
           </h3>
           <p className='text-sm font-normal mt-2 capitalize'>
-            Bodypart - {workout.bodyPart}
+            Body Part - {workout.bodyPart}
           </p>
         </div>
       </div>

@@ -9,6 +9,8 @@ const WorkoutVideos = ({ workoutVideos, name }) => {
   //Pagination state
   const [currentPage, setCurrentPage] = useState(0);
 
+  const elementById = document.getElementById('workout-videos');
+
   // Pagination Calc
   const offset = currentPage * RES_PER_PAGE; // 0 * 6 = 0
   const currentWorkoutVideos = workoutVideos?.slice(
@@ -31,7 +33,7 @@ const WorkoutVideos = ({ workoutVideos, name }) => {
     );
 
   return (
-    <section className='mx-auto max-w-7xl mt-28 mb-16'>
+    <section id='workout-videos' className='mx-auto max-w-7xl pt-28 pb-16'>
       <div className='flex flex-col px-4 sm:px-6 lg:px-8'>
         <h2 className='font-bold text-2xl sm:text-4xl sm:mb-10 mb-6 capitalize'>
           <span className='text-brown'>{name}</span> Workout Videos
@@ -47,7 +49,11 @@ const WorkoutVideos = ({ workoutVideos, name }) => {
         {/* Pagination */}
         <div className='mt-10'>
           {workoutVideos.length > 9 && (
-            <Pagination setCurrentPage={setCurrentPage} items={workoutVideos} />
+            <Pagination
+              setCurrentPage={setCurrentPage}
+              items={workoutVideos}
+              elementById={elementById}
+            />
           )}
         </div>
       </div>

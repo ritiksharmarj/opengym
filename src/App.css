@@ -12,3 +12,11 @@
 .pagination__link--active:hover {
   background-color: #9d4635;
 }
+
+.workout__video--card:hover .play__circle--icon {
+  fill: #9d4635;
+}
+
+.play__circle--icon path:nth-child(2) {
+  fill: #ffffff;
+}
