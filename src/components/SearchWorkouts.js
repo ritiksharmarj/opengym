@@ -25,16 +25,25 @@ const SearchExercises = ({ setWorkouts, setSearchNotFound }) => {
             workout.bodyPart.toLowerCase().includes(search)
         );
 
+        // Scroll to the workouts section right after user enter search input and click on search button
+        document
+          .getElementById('workouts')
+          .scrollIntoView({ behavior: 'smooth' });
+
         // Empty the search field after click the search button
         setSearch('');
 
-        // setWorkouts(searchedWorkouts);
-        searchedWorkouts.length === 0
-          ? setSearchNotFound('Workouts not found. Try again!')
-          : setWorkouts(searchedWorkouts);
+        searchedWorkouts.length === 0 ? (
+          setSearchNotFound('Workouts not found. Try again!')
+        ) : (
+          <>
+            {setWorkouts(searchedWorkouts)}
+            {setSearchNotFound('')}
+          </>
+        );
       }
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 

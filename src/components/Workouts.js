@@ -9,7 +9,8 @@ import { WORKOUT_DATABASE_URL, RES_PER_PAGE } from '../utils/config';
 const Workouts = ({ setWorkouts, workouts, searchNotFound }) => {
   //Pagination state
   const [currentPage, setCurrentPage] = useState(0);
-  // const [workoutsPerPage] = useState(6);
+
+  const elementById = document.getElementById('workouts');
 
   // Fetch perfect workouts as soon as the page loads
   useEffect(() => {
@@ -55,8 +56,8 @@ const Workouts = ({ setWorkouts, workouts, searchNotFound }) => {
     );
 
   return (
-    <section className='mx-auto max-w-7xl'>
-      <div className='px-4 sm:px-6 lg:px-8 mt-28 mb-16'>
+    <section id='workouts' className='mx-auto max-w-7xl pt-28 pb-16'>
+      <div className='px-4 sm:px-6 lg:px-8'>
         <h2 className='font-bold text-center text-3xl sm:text-5xl mb-10'>
           Perfect Workouts
         </h2>
@@ -71,7 +72,11 @@ const Workouts = ({ setWorkouts, workouts, searchNotFound }) => {
         {/* Pagination */}
         <div className='mt-10'>
           {workouts.length > 9 && (
-            <Pagination setCurrentPage={setCurrentPage} items={workouts} />
+            <Pagination
+              setCurrentPage={setCurrentPage}
+              items={workouts}
+              elementById={elementById}
+            />
           )}
         </div>
       </div>
