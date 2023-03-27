@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CheckCircleIcon } from '@heroicons/react/24/outline';
-// import slugify from 'slugify';
 
 import { fetchData, workoutOptions, youtubeOptions } from '../utils/fetchData';
 import { WORKOUT_DATABASE_URL, YT_SEARCH_URL } from '../utils/config';
@@ -9,6 +8,8 @@ import WorkoutVideos from '../components/WorkoutVideos';
 
 const SingleWorkoutDetail = () => {
   const { id } = useParams();
+  const workoutId = id.split('-').pop();
+
   const [workoutDetail, setWorkoutDetail] = useState({});
   const [workoutVideos, setWorkoutVideos] = useState([]);
 
@@ -19,16 +20,10 @@ const SingleWorkoutDetail = () => {
     (async () => {
       // Fetch single workout data using ID
       const singleWorkoutDetailData = await fetchData(
-        `${WORKOUT_DATABASE_URL}/exercises/exercise/${id}`,
+        `${WORKOUT_DATABASE_URL}/exercises/exercise/${workoutId}`,
         workoutOptions
       );
       setWorkoutDetail(singleWorkoutDetailData);
-
-      // const postSlug = slugify(singleWorkoutDetailData.name, {
-      //   lower: true,
-      //   replacement: '-',
-      // });
-      // history.replace(`/workout/${postSlug}`);
 
       // Fetch workout videos using workout name
       const workoutVideosData = await fetchData(
@@ -37,7 +32,7 @@ const SingleWorkoutDetail = () => {
       );
       setWorkoutVideos(workoutVideosData.contents);
     })();
-  }, [id]);
+  }, [workoutId]);
 
   // De-structure the workout detail
   const { bodyPart, gifUrl, name, target, equipment } = workoutDetail;
