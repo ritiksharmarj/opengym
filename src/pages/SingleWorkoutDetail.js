@@ -8,6 +8,8 @@ import WorkoutVideos from '../components/WorkoutVideos';
 
 const SingleWorkoutDetail = () => {
   const { id } = useParams();
+  const workoutId = id.split('-').pop();
+
   const [workoutDetail, setWorkoutDetail] = useState({});
   const [workoutVideos, setWorkoutVideos] = useState([]);
 
@@ -18,7 +20,7 @@ const SingleWorkoutDetail = () => {
     (async () => {
       // Fetch single workout data using ID
       const singleWorkoutDetailData = await fetchData(
-        `${WORKOUT_DATABASE_URL}/exercises/exercise/${id}`,
+        `${WORKOUT_DATABASE_URL}/exercises/exercise/${workoutId}`,
         workoutOptions
       );
       setWorkoutDetail(singleWorkoutDetailData);
@@ -30,7 +32,7 @@ const SingleWorkoutDetail = () => {
       );
       setWorkoutVideos(workoutVideosData.contents);
     })();
-  }, [id]);
+  }, [workoutId]);
 
   // De-structure the workout detail
   const { bodyPart, gifUrl, name, target, equipment } = workoutDetail;
